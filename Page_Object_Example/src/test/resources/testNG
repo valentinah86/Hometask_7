@@ -1,0 +1,9 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<suite name="POM_Example">
+    <test name="Onlinerby_test">
+        <classes>
+            <class name="onlinerby_test.OnlinerBy_test"></class>
+        </classes>
+    </test>
+
+</suite>
