@@ -2,7 +2,8 @@
 <suite name="POM_Example">
     <test name="Onlinerby_test">
         <classes>
-            <class name="onlinerby_test.OnlinerBy_test"></class>
+            <class name="onlinerby_test.OnlinerCatalogTest"></class>
+            <class name="onlinerby_test.OnlinerLoginTest"></class>
         </classes>
     </test>
 

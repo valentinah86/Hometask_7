@@ -1,22 +1,23 @@
 package onlinerby_test;
 
-import onlinerby_po_example.*;
+import onlinerby_po_example.po_onliner_pages.*;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.opera.OperaDriver;
 import org.openqa.selenium.opera.OperaOptions;
+import org.testng.Assert;
 import org.testng.annotations.AfterTest;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
-public class OnlinerBy_test {
+public class OnlinerCatalogTest {
 
     WebDriver driver;
     HomePage homePage;
     Catalog catalog;
-    LoginPage loginPage;
     ProductPage productPage;
     ProductsList productsList;
     Bracket bracket;
@@ -28,63 +29,60 @@ public class OnlinerBy_test {
         OperaOptions options = new OperaOptions().setBinary(BROWSER_PATH);
         driver = new OperaDriver(options);
 
-        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+        driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
 
         homePage = new HomePage(driver);
         homePage.openHomepage();
+
     }
 
-    @Test (enabled = false)
-    public void login (){
-
-       loginPage = new LoginPage(driver);
-       homePage.openLoginPage();
-       loginPage.login("", ""); // insert needed login and password here
-    }
-
-    @Test
+    @BeforeClass
     public void openCatalog (){
 
         homePage.openCatalog();
     }
 
-    @Test (dependsOnMethods = {"openCatalog"})
+    @BeforeClass (dependsOnMethods = {"openCatalog"})
     public void selectCategory (){
         catalog = new Catalog(driver);
         catalog.selectCategory();
     }
 
-    @Test(dependsOnMethods = {"selectCategory"})
+    @BeforeClass(dependsOnMethods = {"selectCategory"})
     public void selectSubCategory (){
         catalog.selectSubCategory();
     }
 
-    @Test (dependsOnMethods = {"selectSubCategory"})
+    @BeforeClass (dependsOnMethods = {"selectSubCategory"})
     public void openProductsList (){
         catalog.openProductsList();
     }
 
-    @Test(dependsOnMethods = {"openProductsList"})
+    @BeforeClass(dependsOnMethods = {"openProductsList"})
     public void selectProduct () throws IOException {
         ProductsList productList = new ProductsList(driver);
         productList.getProduct();
     }
 
-    @Test(dependsOnMethods = {"selectProduct"})
+    @Test
     public void addProductToBracket () throws IOException {
-        ProductPage productPage = new ProductPage(driver);
+        productPage = new ProductPage(driver);
         productPage.addProductToBracket();
-
-
-    }
-
-    @Test(enabled = false)
-    public void checkBracket (){
-        Bracket bracket = new Bracket(driver);
+        productPage.openBracket();
 
     }
 
-    @AfterTest
+    @Test(dependsOnMethods = {"addProductToBracket"})
+
+    public void checkBracket () {
+
+        bracket = new Bracket(driver);
+        Assert.assertFalse(bracket.bracketIsEmpty());
+        Assert.assertEquals(productsList.getSelectedProduct(), bracket.getProductInBracket().getText());
+
+    }
+
+    @AfterTest (enabled = false)
     public void closeBrowser (){
         driver.close();
     }

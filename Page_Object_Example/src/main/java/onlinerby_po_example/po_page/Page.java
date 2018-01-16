@@ -1,4 +1,4 @@
-package onlinerby_po_example;
+package onlinerby_po_example.po_page;
 
 import org.openqa.selenium.WebDriver;
 

@@ -1,5 +1,6 @@
-package onlinerby_po_example;
+package onlinerby_po_example.po_onliner_pages;
 
+import onlinerby_po_example.po_page.Page;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -14,6 +15,8 @@ public class ProductPage extends Page {
 
     private By pricesLocator = By.xpath("//a[@data-href='https://cart.onliner.by']");
 
+    private By bracketLocator = By.xpath("//li[@class='b-top-navigation-cart__item b-top-navigation-cart__item_active']");
+
     public ProductPage(WebDriver driver) {
         super(driver);
     }
@@ -27,5 +30,15 @@ public class ProductPage extends Page {
        }else throw new IOException("Нет доступных предложений");
 
     }
+
+    public Bracket openBracket (){
+
+        WebElement bracket = getDriver().findElement(bracketLocator);
+        bracket.click();
+
+        return new Bracket(driver);
+    }
+
+
 
 }

@@ -1,5 +1,6 @@
-package onlinerby_po_example;
+package onlinerby_po_example.po_onliner_pages;
 
+import onlinerby_po_example.po_page.Page;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -11,6 +12,10 @@ import java.util.Random;
 public class ProductsList extends Page {
 
     private By productsListLocator = By.xpath("//a[@class='schema-product__button button button_orange']");
+
+    // нет в наличии
+    // //div[@class='schema-product__status']
+
     private Random random = new Random();
     private String selectedProduct;
 
