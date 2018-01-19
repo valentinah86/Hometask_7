@@ -36,7 +36,7 @@ public class OnlinerLoginTest {
 
         loginPage = new LoginPage(driver);
         homePage.openLoginPage();
-        loginPage.login("nalija", "7624589"); // insert needed login and password here
+        loginPage.login("hamster_bb", "5598109"); // insert needed login and password here
         Assert.assertTrue(homePage.isUserSignedUp());
     }
 
