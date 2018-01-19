@@ -15,12 +15,12 @@ import java.util.concurrent.TimeUnit;
 
 public class OnlinerCatalogTest {
 
-    WebDriver driver;
-    HomePage homePage;
-    Catalog catalog;
-    ProductPage productPage;
-    ProductsList productsList;
-    Bracket bracket;
+    private WebDriver driver;
+    private HomePage homePage;
+    private Catalog catalog;
+    private ProductPage productPage;
+    private ProductsList productsList;
+    private Bracket bracket;
 
     @BeforeTest
     public void initDriver (){
@@ -29,7 +29,7 @@ public class OnlinerCatalogTest {
         OperaOptions options = new OperaOptions().setBinary(BROWSER_PATH);
         driver = new OperaDriver(options);
 
-        driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
+        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
 
         homePage = new HomePage(driver);
         homePage.openHomepage();
@@ -60,8 +60,8 @@ public class OnlinerCatalogTest {
 
     @BeforeClass(dependsOnMethods = {"openProductsList"})
     public void selectProduct () throws IOException {
-        ProductsList productList = new ProductsList(driver);
-        productList.getProduct();
+        productsList = new ProductsList(driver);
+        productsList.getProduct();
     }
 
     @Test
@@ -78,11 +78,10 @@ public class OnlinerCatalogTest {
 
         bracket = new Bracket(driver);
         Assert.assertFalse(bracket.bracketIsEmpty());
-        Assert.assertEquals(productsList.getSelectedProduct(), bracket.getProductInBracket().getText());
 
     }
 
-    @AfterTest (enabled = false)
+    @AfterTest
     public void closeBrowser (){
         driver.close();
     }

@@ -5,6 +5,7 @@ import onlinerby_po_example.po_onliner_pages.LoginPage;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.opera.OperaDriver;
 import org.openqa.selenium.opera.OperaOptions;
+import org.testng.Assert;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
@@ -24,7 +25,7 @@ public class OnlinerLoginTest {
         OperaOptions options = new OperaOptions().setBinary(BROWSER_PATH);
         driver = new OperaDriver(options);
 
-        driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
+        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
 
         homePage = new HomePage(driver);
         homePage.openHomepage();
@@ -35,10 +36,11 @@ public class OnlinerLoginTest {
 
         loginPage = new LoginPage(driver);
         homePage.openLoginPage();
-        loginPage.login("", ""); // insert needed login and password here
+        loginPage.login("nalija", "7624589"); // insert needed login and password here
+        Assert.assertTrue(homePage.isUserSignedUp());
     }
 
-    @AfterTest
+    @AfterTest (enabled = false)
     public void closeBrowser (){
         driver.close();
     }

@@ -13,11 +13,8 @@ public class ProductsList extends Page {
 
     private By productsListLocator = By.xpath("//a[@class='schema-product__button button button_orange']");
 
-    // нет в наличии
-    // //div[@class='schema-product__status']
-
     private Random random = new Random();
-    private String selectedProduct;
+
 
     public ProductsList(WebDriver driver) {
         super(driver);
@@ -28,17 +25,14 @@ public class ProductsList extends Page {
         List <WebElement> productsList = getDriver().findElements(productsListLocator);
         if (productsList.size()>0){
             WebElement product = productsList.get(random.nextInt(productsList.size()));
-            selectedProduct = product.getText();
             product.click();
         } else {
-            throw new IOException ("Нет доступных предложений");
+            throw new IOException ("No offers in selected category");
         }
 
         return new ProductPage(driver);
     }
 
-    public String getSelectedProduct (){
-        return selectedProduct;
-    }
+
 
 }

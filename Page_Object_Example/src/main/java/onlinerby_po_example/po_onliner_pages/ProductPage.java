@@ -27,7 +27,7 @@ public class ProductPage extends Page {
        if (offers.size()>0) {
            WebElement offer = offers.get(random.nextInt(offers.size()));
            offer.click();
-       }else throw new IOException("Нет доступных предложений");
+       }else throw new IOException("No offers for selected product.");
 
     }
 

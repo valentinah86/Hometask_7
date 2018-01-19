@@ -12,6 +12,7 @@ public class HomePage extends Page {
 
     private final By catalog_locator = By.linkText("Каталог");
     private final By login_locator = By.className("auth-bar__item");
+    private final By userPanelLocator = By.xpath("//a[@class='b-top-profile__preview js-toggle-bar']");
 
     public HomePage(WebDriver driver) {
         super(driver);
@@ -35,6 +36,13 @@ public class HomePage extends Page {
         catalog.click();
 
         return new Catalog(driver);
+    }
+
+    public boolean isUserSignedUp () {
+        WebElement userPanel = getDriver().findElement(userPanelLocator);
+        if (userPanel.isDisplayed()==true) {return true;}
+        else {return false;}
+
     }
 
 }

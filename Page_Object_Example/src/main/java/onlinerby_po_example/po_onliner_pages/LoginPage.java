@@ -11,7 +11,7 @@ public class LoginPage extends Page {
 
     private final By login_locator = By.cssSelector("div>input[data-field='login']");
     private final By password_locator = By.cssSelector("div>input[type='password']");
-    private final By submit_button_locator = By.cssSelector("div>button[type='submit']");
+    private final By submit_button_locator = By.xpath("//button[@class='auth-box__auth-submit auth__btn auth__btn--green']");
 
 
     public LoginPage(WebDriver driver) {
@@ -26,6 +26,7 @@ public class LoginPage extends Page {
 
         loginField.sendKeys(username);
         passwordField.sendKeys(password);
+
         submit.click();
 
         return new HomePage(driver);

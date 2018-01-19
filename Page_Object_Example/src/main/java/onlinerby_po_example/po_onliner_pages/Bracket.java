@@ -7,8 +7,7 @@ import org.openqa.selenium.WebElement;
 
 public class Bracket extends Page {
 
-    private By emptyCartMessage = By.xpath("//div[@class='cart-message__wrapper']/div[@class='cart-message__description']");
-
+    //private By emptyCartMessage = By.xpath("//div[@class='cart-message__wrapper']/div[@class='cart-message__description']");
     private By productTitle = By.xpath("//div[@class='cart-product-title']//span");
 
     public Bracket(WebDriver driver) {
@@ -18,10 +17,9 @@ public class Bracket extends Page {
 
     public boolean bracketIsEmpty (){
 
-        WebElement cartMessage = getDriver().findElement(emptyCartMessage);
-
-        if (cartMessage.isDisplayed() == true){ return true;
-        } else {return  false;}
+        if (getProductInBracket().isDisplayed()==false)
+        {return true;}
+        else return false;
     }
 
     public WebElement getProductInBracket (){
